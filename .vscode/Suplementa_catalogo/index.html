@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suplementa+</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f7fa;color:#222}
+header{background:#111827;color:white;padding:18px 6%;display:flex;align-items:center;gap:25px;position:sticky;top:0;z-index:20}
+.logo{font-size:25px;font-weight:bold;color:#38bdf8}
+.search{flex:1;max-width:550px;padding:12px 16px;border:0;border-radius:25px}
+button{cursor:pointer;border:0}
+.cart-btn{background:#38bdf8;padding:11px 18px;border-radius:22px;font-weight:bold}
+.hero{padding:65px 8%;background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;text-align:center}
+.hero h1{font-size:42px;margin-bottom:12px}
+.hero p{font-size:18px}
+.categories{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:25px}
+.category{padding:10px 18px;border-radius:20px;background:white;border:1px solid #ddd}
+.category.active{background:#2563eb;color:white}
+.container{max-width:1200px;margin:auto;padding:20px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.product-card{background:white;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px #0001}
+.product-image{height:210px;background:#eef2ff;display:flex;align-items:center;justify-content:center;position:relative}
+.product-image img{width:75%;height:75%;object-fit:contain}
+.product-category{position:absolute;top:10px;left:10px;background:#2563eb;color:white;padding:5px 9px;border-radius:12px;font-size:12px}
+.product-info{padding:18px}
+.product-info h3{margin-bottom:8px}
+.product-info p{font-size:14px;color:#666;min-height:48px}
+.details-product{background:none;color:#2563eb;margin:12px 0}
+.product-price{display:flex;align-items:center;justify-content:space-between}
+.product-price strong{font-size:20px}
+.add-product{width:38px;height:38px;border-radius:50%;background:#2563eb;color:white;font-size:22px}
+#noProducts{text-align:center;padding:40px;display:none}
+#noProducts.show{display:block}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:50;align-items:center;justify-content:center;padding:20px}
+.modal.active{display:flex}
+.modal-box{background:white;border-radius:16px;max-width:800px;width:100%;max-height:90vh;overflow:auto;padding:25px;position:relative}
+.close{position:absolute;right:18px;top:12px;font-size:28px;background:none}
+.modal-product{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
+.modal-product-image{height:330px;background:#eef2ff;display:flex;align-items:center;justify-content:center;border-radius:12px}
+.modal-product-image img{width:80%;height:80%;object-fit:contain}
+.modal-price{display:block;font-size:25px;margin:20px 0}
+.btn-primary{background:#2563eb;color:white;padding:13px 18px;border-radius:8px}
+.cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:15px;align-items:center;border-bottom:1px solid #ddd;padding:15px 0}
+.cart-item-image{width:70px;height:70px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.cart-item-image img{width:90%;height:90%;object-fit:contain}
+.quantity{display:flex;gap:10px;align-items:center;margin-top:8px}
+.quantity button{width:27px;height:27px;border-radius:50%;background:#ddd}
+.remove-item{background:none;color:#dc2626;margin-top:7px}
+#emptyCart{text-align:center;padding:30px;color:#666}
+#cartFooter{display:none;border-top:1px solid #ddd;margin-top:15px;padding-top:15px}
+.total{display:flex;justify-content:space-between;font-size:20px;margin-bottom:15px}
+.toast{position:fixed;right:20px;bottom:20px;background:#111827;color:white;padding:14px 20px;border-radius:8px;display:none;z-index:100}
+.toast.show{display:block}
+footer{margin-top:50px;background:#111827;color:white;text-align:center;padding:30px}
+footer button{background:#25d366;color:white;padding:12px 18px;border-radius:20px;margin-top:12px}
+@media(max-width:650px){
+ header{flex-wrap:wrap}.search{order:3;flex-basis:100%}
+ .hero h1{font-size:32px}.modal-product{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Suplementa+</div>
+  <input id="searchInput" class="search" type="search" placeholder="Pesquisar produto...">
+  <button id="openCart" class="cart-btn">🛒 Carrinho (<span id="cartCount">0</span>)</button>
+</header>
+
+<section class="hero">
+  <h1>Suplementa+</h1>
+  <p>Suplementos para complementar sua rotina de treinos.</p>
+</section>
+
+<nav class="categories">
+  <button class="category active" data-category="todos">Todos</button>
+  <button class="category" data-category="proteina">Proteínas</button>
+  <button class="category" data-category="creatina">Creatina</button>
+  <button class="category" data-category="vitamina">Vitaminas</button>
+  <button class="category" data-category="energia">Energia</button>
+</nav>
+
+<main class="container">
+  <div id="productsGrid" class="products-grid"></div>
+  <div id="noProducts">Nenhum produto encontrado.</div>
+</main>
+
+<div id="productModal" class="modal">
+  <div class="modal-box">
+    <button id="closeProduct" class="close">&times;</button>
+    <div id="productModalContent"></div>
+  </div>
+</div>
+
+<div id="cartModal" class="modal">
+  <div class="modal-box">
+    <button id="closeCart" class="close">&times;</button>
+    <h2>🛒 Seu carrinho</h2>
+    <div id="cartItems"></div>
+    <div id="emptyCart">Seu carrinho está vazio.</div>
+    <div id="cartFooter">
+      <div class="total"><span>Total:</span><strong id="cartTotal">R$ 0,00</strong></div>
+      <button id="checkoutWhatsapp" class="btn-primary">Finalizar pelo WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<footer>
+  <p>Suplementa+ — Sua loja de suplementos</p>
+  <button id="contactWhatsapp">Falar pelo WhatsApp</button>
+</footer>
+
+<script>
+const WHATSAPP_NUMBER = "5516999999999";
+
+const products = [
+{id:1,name:"Whey Protein",category:"proteina",categoryName:"Proteína",price:129.90,description:"Suplemento alimentar à base de proteína do soro do leite.",image:"img/imagemsite-tcc-wheyprotein.png"},
+{id:2,name:"Colágeno",category:"vitamina",categoryName:"Vitaminas",price:79.90,description:"Suplemento alimentar de colágeno.",image:"img/imagemdosite-tcc-colageno.png"},
+{id:3,name:"Magnésio",category:"vitamina",categoryName:"Vitaminas",price:49.90,description:"Suplemento alimentar de magnésio.",image:"img/imagemsite-tcc-magnesio.png"},
+{id:4,name:"Ômega 3",category:"vitamina",categoryName:"Vitaminas",price:59.90,description:"Suplemento alimentar à base de ômega 3.",image:"img/imagemsite-tcc-omega3.png"},
+{id:5,name:"BCAA",category:"energia",categoryName:"Energia",price:79.90,description:"Suplemento alimentar composto por aminoácidos de cadeia ramificada.",image:"img/tcc- bcaaAminoácido.png"},
+{id:6,name:"Multivitamínico",category:"vitamina",categoryName:"Vitaminas",price:69.90,description:"Produto com combinação de vitaminas e minerais.",image:"img/tcc- imagemMultivitaminico.png"},
+{id:7,name:"Vitamina D",category:"vitamina",categoryName:"Vitaminas",price:39.90,description:"Suplemento alimentar de vitamina D.",image:"img/tcc- imagemvitaminaD.png"},
+{id:8,name:"Zinco",category:"vitamina",categoryName:"Vitaminas",price:39.90,description:"Suplemento alimentar de zinco.",image:"img/tcc- imagemzinco.png"},
+{id:9,name:"Vitamina C",category:"vitamina",categoryName:"Vitaminas",price:39.90,description:"Suplemento alimentar de vitamina C.",image:"img/tcc-vitaminaC.png"}
+];
+
+let cart = JSON.parse(localStorage.getItem("suplementaCart")) || [];
+
+const productsGrid=document.getElementById("productsGrid");
+const searchInput=document.getElementById("searchInput");
+const noProducts=document.getElementById("noProducts");
+const cartCount=document.getElementById("cartCount");
+const cartModal=document.getElementById("cartModal");
+const cartItems=document.getElementById("cartItems");
+const emptyCart=document.getElementById("emptyCart");
+const cartFooter=document.getElementById("cartFooter");
+const cartTotal=document.getElementById("cartTotal");
+const productModal=document.getElementById("productModal");
+const productModalContent=document.getElementById("productModalContent");
+const toast=document.getElementById("toast");
+
+function formatPrice(value){
+ return value.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+function saveCart(){
+ localStorage.setItem("suplementaCart",JSON.stringify(cart));
+}
+function renderProducts(category="todos",search=""){
+ const searchText=search.toLowerCase().trim();
+ const filteredProducts=products.filter(product=>{
+  const categoryMatch=category==="todos"||product.category===category;
+  const searchMatch=product.name.toLowerCase().includes(searchText)||product.description.toLowerCase().includes(searchText);
+  return categoryMatch&&searchMatch;
+ });
+ productsGrid.innerHTML="";
+ if(filteredProducts.length===0){noProducts.classList.add("show");return;}
+ noProducts.classList.remove("show");
+ filteredProducts.forEach(product=>{
+  const card=document.createElement("article");
+  card.className="product-card";
+  card.innerHTML=`
+   <div class="product-image">
+    <span class="product-category">${product.categoryName}</span>
+    <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'">
+   </div>
+   <div class="product-info">
+    <h3>${product.name}</h3>
+    <p>${product.description}</p>
+    <button class="details-product" onclick="openProduct(${product.id})">Ver detalhes</button>
+    <div class="product-price">
+     <strong>${formatPrice(product.price)}</strong>
+     <button class="add-product" onclick="addToCart(${product.id})">+</button>
+    </div>
+   </div>`;
+  productsGrid.appendChild(card);
+ });
+}
+function addToCart(productId){
+ const product=products.find(item=>item.id===productId);
+ if(!product)return;
+ const existingProduct=cart.find(item=>item.id===productId);
+ if(existingProduct) existingProduct.quantity++;
+ else cart.push({id:product.id,name:product.name,price:product.price,quantity:1});
+ saveCart();updateCart();showToast(`${product.name} foi adicionado ao carrinho!`);
+}
+function updateCart(){
+ let totalQuantity=0,totalPrice=0;
+ cart.forEach(item=>{totalQuantity+=item.quantity;totalPrice+=item.price*item.quantity;});
+ cartCount.textContent=totalQuantity;
+ cartTotal.textContent=formatPrice(totalPrice);
+ renderCart();
+}
+function renderCart(){
+ cartItems.innerHTML="";
+ if(cart.length===0){emptyCart.style.display="block";cartFooter.style.display="none";return;}
+ emptyCart.style.display="none";cartFooter.style.display="block";
+ cart.forEach(item=>{
+  const product=products.find(p=>p.id===item.id);
+  const cartItem=document.createElement("div");
+  cartItem.className="cart-item";
+  cartItem.innerHTML=`
+   <div class="cart-item-image"><img src="${product.image}" alt="${item.name}" onerror="this.style.display='none'"></div>
+   <div>
+    <h4>${item.name}</h4>
+    <small>${formatPrice(item.price)}</small>
+    <div class="quantity">
+     <button onclick="changeQuantity(${item.id},-1)">−</button>
+     <strong>${item.quantity}</strong>
+     <button onclick="changeQuantity(${item.id},1)">+</button>
+    </div>
+    <button class="remove-item" onclick="removeFromCart(${item.id})">🗑 Remover</button>
+   </div>
+   <strong>${formatPrice(item.price*item.quantity)}</strong>`;
+  cartItems.appendChild(cartItem);
+ });
+}
+function changeQuantity(productId,amount){
+ const item=cart.find(product=>product.id===productId);
+ if(!item)return;
+ item.quantity+=amount;
+ if(item.quantity<=0)cart=cart.filter(product=>product.id!==productId);
+ saveCart();updateCart();
+}
+function removeFromCart(productId){
+ cart=cart.filter(item=>item.id!==productId);
+ saveCart();updateCart();showToast("Produto removido do carrinho.");
+}
+function getCartTotal(){
+ return cart.reduce((total,item)=>total+item.price*item.quantity,0);
+}
+function sendWhatsAppOrder(){
+ if(cart.length===0){showToast("Adicione algum produto ao carrinho.");return;}
+ let message="Olá! Gostaria de fazer um pedido:%0A%0A";
+ cart.forEach(item=>{
+  message+=`• ${item.quantity}x ${item.name} - ${formatPrice(item.price*item.quantity)}%0A`;
+ });
+ message+=`%0A*Total: ${formatPrice(getCartTotal())}*`;
+ message+="%0A%0AGostaria de saber sobre a disponibilidade dos produtos.";
+ window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,"_blank");
+}
+function sendWhatsAppContact(){
+ const message="Olá! Gostaria de saber mais sobre os produtos da Suplementa+.";
+ window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,"_blank");
+}
+function openProduct(productId){
+ const product=products.find(item=>item.id===productId);
+ if(!product)return;
+ productModalContent.innerHTML=`
+  <div class="modal-product">
+   <div class="modal-product-image"><img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'"></div>
+   <div>
+    <span>${product.categoryName}</span>
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <strong class="modal-price">${formatPrice(product.price)}</strong>
+    <button class="btn-primary" onclick="addToCart(${product.id});closeProductModal();">🛒 Adicionar ao carrinho</button>
+   </div>
+  </div>`;
+ productModal.classList.add("active");
+ document.body.style.overflow="hidden";
+}
+function closeProductModal(){productModal.classList.remove("active");document.body.style.overflow="";}
+function openCartModal(){cartModal.classList.add("active");document.body.style.overflow="hidden";}
+function closeCartModal(){cartModal.classList.remove("active");document.body.style.overflow="";}
+let toastTimeout;
+function showToast(message){
+ toast.textContent=message;toast.classList.add("show");clearTimeout(toastTimeout);
+ toastTimeout=setTimeout(()=>toast.classList.remove("show"),2500);
+}
+let currentCategory="todos";
+document.querySelectorAll(".category").forEach(button=>{
+ button.addEventListener("click",()=>{
+  document.querySelectorAll(".category").forEach(btn=>btn.classList.remove("active"));
+  button.classList.add("active");
+  currentCategory=button.dataset.category;
+  renderProducts(currentCategory,searchInput.value);
+ });
+});
+searchInput.addEventListener("input",()=>renderProducts(currentCategory,searchInput.value));
+document.getElementById("openCart").addEventListener("click",openCartModal);
+document.getElementById("closeCart").addEventListener("click",closeCartModal);
+document.getElementById("closeProduct").addEventListener("click",closeProductModal);
+document.getElementById("checkoutWhatsapp").addEventListener("click",sendWhatsAppOrder);
+document.getElementById("contactWhatsapp").addEventListener("click",sendWhatsAppContact);
+cartModal.addEventListener("click",event=>{if(event.target===cartModal)closeCartModal();});
+productModal.addEventListener("click",event=>{if(event.target===productModal)closeProductModal();});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeCartModal();closeProductModal();}});
+renderProducts();
+updateCart();
+</script>
+</body>
+</html>
