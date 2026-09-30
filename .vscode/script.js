@@ -1,1050 +1,280 @@
-/* =========================================
-   CONFIGURAÇÃO
-========================================= */
+// ===============================
+// FUNÇÕES DO CARRINHO
+// ===============================
 
-// COLOQUE AQUI O NÚMERO DO WHATSAPP DA LOJA
-//
-// Formato:
-// Brasil = 55
-// DDD = 16
-// Número = 999999999
-//
-// Exemplo:
-// 5516999999999
+let carrinho = [];
 
-const WHATSAPP_NUMBER = "5516999999999";
+// Elementos do HTML
+const cartModal = document.getElementById("cartModal");
+const cartItems = document.getElementById("cartItems");
+const emptyCart = document.getElementById("emptyCart");
+const cartFooter = document.getElementById("cartFooter");
+const cartTotal = document.getElementById("cartTotal");
+const cartCounter = document.querySelector(".cart-button b");
 
 
-/* =========================================
-   PRODUTOS
-========================================= */
+// ===============================
+// ADICIONAR PRODUTO AO CARRINHO
+// ===============================
 
-const products = [
+function adicionarAoCarrinho(nome, preco, imagem) {
 
-    {
-        id: 1,
-        name: "Whey Protein Concentrado",
-        category: "proteina",
-        categoryName: "Proteína",
-        price: 129.90,
-        description:
-            "Suplemento alimentar à base de proteína do soro do leite.",
-        icon: "fa-solid fa-bottle-droplet"
-    },
-
-    {
-        id: 2,
-        name: "Whey Protein Isolado",
-        category: "proteina",
-        categoryName: "Proteína",
-        price: 179.90,
-        description:
-            "Proteína do soro do leite em uma versão isolada.",
-        icon: "fa-solid fa-bottle-droplet"
-    },
-
-    {
-        id: 3,
-        name: "Creatina Monohidratada",
-        category: "creatina",
-        categoryName: "Creatina",
-        price: 89.90,
-        description:
-            "Creatina monohidratada para complementar a alimentação.",
-        icon: "fa-solid fa-bolt"
-    },
-
-    {
-        id: 4,
-        name: "Creatina em Cápsulas",
-        category: "creatina",
-        categoryName: "Creatina",
-        price: 99.90,
-        description:
-            "Creatina apresentada em cápsulas para facilitar o consumo.",
-        icon: "fa-solid fa-capsules"
-    },
-
-    {
-        id: 5,
-        name: "Multivitamínico",
-        category: "vitamina",
-        categoryName: "Vitaminas",
-        price: 69.90,
-        description:
-            "Produto com combinação de vitaminas e minerais.",
-        icon: "fa-solid fa-capsules"
-    },
-
-    {
-        id: 6,
-        name: "Vitamina C",
-        category: "vitamina",
-        categoryName: "Vitaminas",
-        price: 39.90,
-        description:
-            "Suplemento alimentar de vitamina C.",
-        icon: "fa-solid fa-apple-whole"
-    },
-
-    {
-        id: 7,
-        name: "Pré-Treino",
-        category: "energia",
-        categoryName: "Energia",
-        price: 109.90,
-        description:
-            "Suplemento desenvolvido para ser utilizado antes da atividade física.",
-        icon: "fa-solid fa-bolt"
-    },
-
-    {
-        id: 8,
-        name: "Barra de Proteína",
-        category: "proteina",
-        categoryName: "Proteína",
-        price: 12.90,
-        description:
-            "Barra com proteína para complementar a alimentação.",
-        icon: "fa-solid fa-cookie-bite"
-    },
-
-    {
-        id: 9,
-        name: "BCAA",
-        category: "energia",
-        categoryName: "Energia",
-        price: 79.90,
-        description:
-            "Suplemento alimentar composto por aminoácidos de cadeia ramificada.",
-        icon: "fa-solid fa-flask"
-    },
-
-    {
-        id: 10,
-        name: "Glutamina",
-        category: "energia",
-        categoryName: "Energia",
-        price: 84.90,
-        description:
-            "Suplemento alimentar à base de glutamina.",
-        icon: "fa-solid fa-flask"
-    },
-
-    {
-        id: 11,
-        name: "Ômega 3",
-        category: "vitamina",
-        categoryName: "Vitaminas",
-        price: 59.90,
-        description:
-            "Suplemento alimentar à base de óleo de peixe.",
-        icon: "fa-solid fa-capsules"
-    },
-
-    {
-        id: 12,
-        name: "Hipercalórico",
-        category: "proteina",
-        categoryName: "Proteína",
-        price: 119.90,
-        description:
-            "Suplemento alimentar com combinação de carboidratos e proteínas.",
-        icon: "fa-solid fa-bottle-droplet"
-    }
-
-];
-
-
-/* =========================================
-   CARRINHO
-========================================= */
-
-let cart = JSON.parse(
-    localStorage.getItem("suplementaCart")
-) || [];
-
-
-/* =========================================
-   ELEMENTOS
-========================================= */
-
-const productsGrid =
-    document.getElementById("productsGrid");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const noProducts =
-    document.getElementById("noProducts");
-
-const cartCount =
-    document.getElementById("cartCount");
-
-const cartModal =
-    document.getElementById("cartModal");
-
-const cartItems =
-    document.getElementById("cartItems");
-
-const emptyCart =
-    document.getElementById("emptyCart");
-
-const cartFooter =
-    document.getElementById("cartFooter");
-
-const cartTotal =
-    document.getElementById("cartTotal");
-
-const productModal =
-    document.getElementById("productModal");
-
-const productModalContent =
-    document.getElementById("productModalContent");
-
-const toast =
-    document.getElementById("toast");
-
-
-/* =========================================
-   FORMATAÇÃO DE PREÇO
-========================================= */
-
-function formatPrice(value) {
-
-    return value.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    });
-
-}
-
-
-/* =========================================
-   SALVAR CARRINHO
-========================================= */
-
-function saveCart() {
-
-    localStorage.setItem(
-        "suplementaCart",
-        JSON.stringify(cart)
+    const produtoExistente = carrinho.find(
+        produto => produto.nome === nome
     );
 
-}
+    if (produtoExistente) {
 
-
-/* =========================================
-   MOSTRAR PRODUTOS
-========================================= */
-
-function renderProducts(
-    category = "todos",
-    search = ""
-) {
-
-    const searchText =
-        search.toLowerCase().trim();
-
-
-    const filteredProducts =
-        products.filter(product => {
-
-            const categoryMatch =
-                category === "todos" ||
-                product.category === category;
-
-            const searchMatch =
-                product.name
-                    .toLowerCase()
-                    .includes(searchText) ||
-                product.description
-                    .toLowerCase()
-                    .includes(searchText);
-
-            return categoryMatch && searchMatch;
-
-        });
-
-
-    productsGrid.innerHTML = "";
-
-
-    if (filteredProducts.length === 0) {
-
-        noProducts.classList.add("show");
-
-        return;
-
-    }
-
-
-    noProducts.classList.remove("show");
-
-
-    filteredProducts.forEach(product => {
-
-        const card =
-            document.createElement("article");
-
-        card.className = "product-card";
-
-
-        card.innerHTML = `
-
-            <div class="product-image">
-
-                <span class="product-category">
-                    ${product.categoryName}
-                </span>
-
-                <i class="${product.icon}"></i>
-
-            </div>
-
-            <div class="product-info">
-
-                <h3>
-                    ${product.name}
-                </h3>
-
-                <p>
-                    ${product.description}
-                </p>
-
-                <button
-                    class="details-product"
-                    onclick="openProduct(${product.id})"
-                >
-                    Ver detalhes
-                </button>
-
-                <div class="product-price">
-
-                    <strong>
-                        ${formatPrice(product.price)}
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        onclick="addToCart(${product.id})"
-                        title="Adicionar ao carrinho"
-                    >
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        productsGrid.appendChild(card);
-
-    });
-
-}
-
-
-/* =========================================
-   ADICIONAR AO CARRINHO
-========================================= */
-
-function addToCart(productId) {
-
-    const product =
-        products.find(
-            item => item.id === productId
-        );
-
-
-    if (!product) {
-        return;
-    }
-
-
-    const existingProduct =
-        cart.find(
-            item => item.id === productId
-        );
-
-
-    if (existingProduct) {
-
-        existingProduct.quantity++;
+        produtoExistente.quantidade++;
 
     } else {
 
-        cart.push({
+        carrinho.push({
+            nome: nome,
+            preco: preco,
+            imagem: imagem,
+            quantidade: 1
+        });
 
-            id: product.id,
+    }
 
-            name: product.name,
+    atualizarCarrinho();
 
-            price: product.price,
+    alert(nome + " foi adicionado ao carrinho!");
+}
 
-            quantity: 1
+
+// ===============================
+// ATUALIZAR CARRINHO
+// ===============================
+
+function atualizarCarrinho() {
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+    let quantidadeTotal = 0;
+
+    if (carrinho.length === 0) {
+
+        emptyCart.style.display = "block";
+        cartFooter.style.display = "none";
+
+    } else {
+
+        emptyCart.style.display = "none";
+        cartFooter.style.display = "block";
+
+        carrinho.forEach((produto, index) => {
+
+            total += produto.preco * produto.quantidade;
+            quantidadeTotal += produto.quantidade;
+
+            const item = document.createElement("div");
+
+            item.classList.add("cart-item");
+
+            item.innerHTML = `
+                <img 
+                    src="${produto.imagem}" 
+                    alt="${produto.nome}"
+                    width="70"
+                >
+
+                <div class="cart-item-info">
+
+                    <h4>${produto.nome}</h4>
+
+                    <span>
+                        R$ ${produto.preco
+                            .toFixed(2)
+                            .replace(".", ",")}
+                    </span>
+
+                    <div class="cart-quantity">
+
+                        <button 
+                            onclick="diminuirQuantidade(${index})">
+                            −
+                        </button>
+
+                        <strong>
+                            ${produto.quantidade}
+                        </strong>
+
+                        <button 
+                            onclick="aumentarQuantidade(${index})">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button 
+                    class="remove-item"
+                    onclick="removerDoCarrinho(${index})">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+            `;
+
+            cartItems.appendChild(item);
 
         });
 
     }
 
-
-    saveCart();
-
-    updateCart();
-
-    showToast(
-        `${product.name} foi adicionado ao carrinho!`
-    );
-
-}
-
-
-/* =========================================
-   ATUALIZAR CARRINHO
-========================================= */
-
-function updateCart() {
-
-    let totalQuantity = 0;
-
-    let totalPrice = 0;
-
-
-    cart.forEach(item => {
-
-        totalQuantity += item.quantity;
-
-        totalPrice +=
-            item.price * item.quantity;
-
-    });
-
-
-    cartCount.textContent = totalQuantity;
-
     cartTotal.textContent =
-        formatPrice(totalPrice);
+        "R$ " +
+        total.toFixed(2).replace(".", ",");
 
-
-    renderCart();
-
+    cartCounter.textContent = quantidadeTotal;
 }
 
 
-/* =========================================
-   MOSTRAR CARRINHO
-========================================= */
+// ===============================
+// AUMENTAR QUANTIDADE
+// ===============================
 
-function renderCart() {
+function aumentarQuantidade(index) {
 
-    cartItems.innerHTML = "";
+    carrinho[index].quantidade++;
+
+    atualizarCarrinho();
+}
 
 
-    if (cart.length === 0) {
+// ===============================
+// DIMINUIR QUANTIDADE
+// ===============================
 
-        emptyCart.style.display = "block";
+function diminuirQuantidade(index) {
 
-        cartFooter.style.display = "none";
+    carrinho[index].quantidade--;
 
-        return;
+    if (carrinho[index].quantidade <= 0) {
+
+        carrinho.splice(index, 1);
 
     }
 
-
-    emptyCart.style.display = "none";
-
-    cartFooter.style.display = "block";
-
-
-    cart.forEach(item => {
-
-        const product =
-            products.find(
-                p => p.id === item.id
-            );
-
-
-        const cartItem =
-            document.createElement("div");
-
-        cartItem.className = "cart-item";
-
-
-        cartItem.innerHTML = `
-
-            <div class="cart-item-image">
-
-                <i class="${product.icon}"></i>
-
-            </div>
-
-
-            <div>
-
-                <h4>
-                    ${item.name}
-                </h4>
-
-                <small>
-                    ${formatPrice(item.price)}
-                </small>
-
-
-                <div class="quantity">
-
-                    <button
-                        onclick="changeQuantity(${item.id}, -1)"
-                    >
-                        -
-                    </button>
-
-                    <strong>
-                        ${item.quantity}
-                    </strong>
-
-                    <button
-                        onclick="changeQuantity(${item.id}, 1)"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-
-                <button
-                    class="remove-item"
-                    onclick="removeFromCart(${item.id})"
-                >
-                    <i class="fa-solid fa-trash"></i>
-                    Remover
-                </button>
-
-            </div>
-
-
-            <strong class="cart-item-total">
-
-                ${formatPrice(
-                    item.price * item.quantity
-                )}
-
-            </strong>
-
-        `;
-
-
-        cartItems.appendChild(cartItem);
-
-    });
-
+    atualizarCarrinho();
 }
 
 
-/* =========================================
-   ALTERAR QUANTIDADE
-========================================= */
+// ===============================
+// REMOVER PRODUTO
+// ===============================
 
-function changeQuantity(
-    productId,
-    amount
-) {
+function removerDoCarrinho(index) {
 
-    const item =
-        cart.find(
-            product => product.id === productId
-        );
+    carrinho.splice(index, 1);
 
-
-    if (!item) {
-        return;
-    }
-
-
-    item.quantity += amount;
-
-
-    if (item.quantity <= 0) {
-
-        cart =
-            cart.filter(
-                product => product.id !== productId
-            );
-
-    }
-
-
-    saveCart();
-
-    updateCart();
-
+    atualizarCarrinho();
 }
 
 
-/* =========================================
-   REMOVER PRODUTO
-========================================= */
-
-function removeFromCart(productId) {
-
-    cart =
-        cart.filter(
-            item => item.id !== productId
-        );
-
-
-    saveCart();
-
-    updateCart();
-
-    showToast(
-        "Produto removido do carrinho."
-    );
-
-}
-
-
-/* =========================================
-   TOTAL DO CARRINHO
-========================================= */
-
-function getCartTotal() {
-
-    return cart.reduce(
-        (total, item) =>
-            total + item.price * item.quantity,
-        0
-    );
-
-}
-
-
-/* =========================================
-   WHATSAPP
-========================================= */
-
-function sendWhatsAppOrder() {
-
-    if (cart.length === 0) {
-
-        showToast(
-            "Adicione algum produto ao carrinho."
-        );
-
-        return;
-
-    }
-
-
-    let message =
-        "Olá! Gostaria de fazer um pedido:%0A%0A";
-
-
-    cart.forEach(item => {
-
-        const subtotal =
-            item.price * item.quantity;
-
-
-        message +=
-            `• ${item.quantity}x ${item.name} - ${formatPrice(subtotal)}%0A`;
-
-    });
-
-
-    message +=
-        `%0A*Total: ${formatPrice(getCartTotal())}*`;
-
-
-    message +=
-        "%0A%0AGostaria de saber sobre a disponibilidade dos produtos.";
-
-
-    const whatsappURL =
-        `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
-
-
-    window.open(
-        whatsappURL,
-        "_blank"
-    );
-
-}
-
-
-/* =========================================
-   BOTÃO CONTATO WHATSAPP
-========================================= */
-
-function sendWhatsAppContact() {
-
-    const message =
-        "Olá! Gostaria de saber mais sobre os produtos da Suplementa+.";
-
-
-    const whatsappURL =
-        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-
-    window.open(
-        whatsappURL,
-        "_blank"
-    );
-
-}
-
-
-/* =========================================
-   MODAL DO PRODUTO
-========================================= */
-
-function openProduct(productId) {
-
-    const product =
-        products.find(
-            item => item.id === productId
-        );
-
-
-    if (!product) {
-        return;
-    }
-
-
-    productModalContent.innerHTML = `
-
-        <div class="modal-product-image">
-
-            <i class="${product.icon}"></i>
-
-        </div>
-
-
-        <div class="modal-product-info">
-
-            <span>
-                ${product.categoryName}
-            </span>
-
-            <h2>
-                ${product.name}
-            </h2>
-
-            <p>
-                ${product.description}
-            </p>
-
-            <strong class="modal-price">
-                ${formatPrice(product.price)}
-            </strong>
-
-            <button
-                class="btn btn-primary"
-                onclick="addToCart(${product.id}); closeProductModal();"
-            >
-
-                <i class="fa-solid fa-cart-plus"></i>
-
-                Adicionar ao carrinho
-
-            </button>
-
-        </div>
-
-    `;
-
-
-    productModal.classList.add("active");
-
-    document.body.style.overflow = "hidden";
-
-}
-
-
-/* =========================================
-   FECHAR MODAL PRODUTO
-========================================= */
-
-function closeProductModal() {
-
-    productModal.classList.remove("active");
-
-    document.body.style.overflow = "";
-
-}
-
-
-/* =========================================
-   ABRIR CARRINHO
-========================================= */
-
-function openCartModal() {
-
-    cartModal.classList.add("active");
-
-    document.body.style.overflow = "hidden";
-
-}
-
-
-/* =========================================
-   FECHAR CARRINHO
-========================================= */
-
-function closeCartModal() {
-
-    cartModal.classList.remove("active");
-
-    document.body.style.overflow = "";
-
-}
-
-
-/* =========================================
-   TOAST
-========================================= */
-
-let toastTimeout;
-
-
-function showToast(message) {
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-
-    clearTimeout(toastTimeout);
-
-
-    toastTimeout =
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 2500);
-
-}
-
-
-/* =========================================
-   FILTRO POR CATEGORIA
-========================================= */
-
-let currentCategory = "todos";
-
-
-document
-    .querySelectorAll(".category")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                document
-                    .querySelectorAll(".category")
-                    .forEach(btn =>
-                        btn.classList.remove("active")
-                    );
-
-
-                button.classList.add("active");
-
-
-                currentCategory =
-                    button.dataset.category;
-
-
-                renderProducts(
-                    currentCategory,
-                    searchInput.value
-                );
-
-            }
-        );
-
-    });
-
-
-/* =========================================
-   PESQUISA
-========================================= */
-
-searchInput.addEventListener(
-    "input",
-    () => {
-
-        renderProducts(
-            currentCategory,
-            searchInput.value
-        );
-
-    }
-);
-
-
-/* =========================================
-   EVENTOS DOS BOTÕES
-========================================= */
+// ===============================
+// ABRIR CARRINHO
+// ===============================
 
 document
     .getElementById("openCart")
-    .addEventListener(
-        "click",
-        openCartModal
-    );
+    .addEventListener("click", function () {
 
+        cartModal.classList.add("active");
 
-document
-    .getElementById("closeCart")
-    .addEventListener(
-        "click",
-        closeCartModal
-    );
-
-
-document
-    .getElementById("closeProduct")
-    .addEventListener(
-        "click",
-        closeProductModal
-    );
-
-
-document
-    .getElementById("checkoutWhatsapp")
-    .addEventListener(
-        "click",
-        sendWhatsAppOrder
-    );
-
-
-document
-    .getElementById("contactWhatsapp")
-    .addEventListener(
-        "click",
-        sendWhatsAppContact
-    );
-
-
-document
-    .getElementById("footerWhatsapp")
-    .addEventListener(
-        "click",
-        event => {
-
-            event.preventDefault();
-
-            sendWhatsAppContact();
-
-        }
-    );
-
-
-/* =========================================
-   MENU MOBILE
-========================================= */
-
-const menuMobile =
-    document.getElementById("menuMobile");
-
-const mobileMenu =
-    document.getElementById("mobileMenu");
-
-
-menuMobile.addEventListener(
-    "click",
-    () => {
-
-        mobileMenu.classList.toggle("active");
-
-    }
-);
-
-
-/* Fecha o menu ao clicar em algum link */
-
-mobileMenu
-    .querySelectorAll("a")
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                mobileMenu.classList.remove(
-                    "active"
-                );
-
-            }
-        );
+        atualizarCarrinho();
 
     });
 
 
-/* =========================================
-   FECHAR MODAIS CLICANDO FORA
-========================================= */
+// ===============================
+// FECHAR CARRINHO
+// ===============================
 
-cartModal.addEventListener(
-    "click",
-    event => {
+document
+    .getElementById("closeCart")
+    .addEventListener("click", function () {
 
-        if (
-            event.target === cartModal
-        ) {
+        cartModal.classList.remove("active");
 
-            closeCartModal();
-
-        }
-
-    }
-);
+    });
 
 
-productModal.addEventListener(
-    "click",
-    event => {
+// ===============================
+// FECHAR CLICANDO FORA
+// ===============================
 
-        if (
-            event.target === productModal
-        ) {
+cartModal.addEventListener("click", function(event) {
 
-            closeProductModal();
+    if (event.target === cartModal) {
 
-        }
+        cartModal.classList.remove("active");
 
     }
-);
+
+});
 
 
-/* =========================================
-   TECLA ESC
-========================================= */
+// ===============================
+// FINALIZAR PEDIDO PELO WHATSAPP
+// ===============================
 
-document.addEventListener(
-    "keydown",
-    event => {
+document
+    .getElementById("checkoutWhatsapp")
+    .addEventListener("click", function () {
 
-        if (event.key === "Escape") {
+        if (carrinho.length === 0) {
 
-            closeCartModal();
+            alert("Seu carrinho está vazio!");
 
-            closeProductModal();
-
+            return;
         }
 
-    }
+        let mensagem =
+            "Olá! Gostaria de fazer um pedido:%0A%0A";
+
+        let total = 0;
+
+        carrinho.forEach(produto => {
+
+            const subtotal =
+                produto.preco * produto.quantidade;
+
+            total += subtotal;
+
+            mensagem +=
+                `${produto.nome} - ` +
+                `${produto.quantidade}x - ` +
+                `R$ ${subtotal
+                    .toFixed(2)
+                    .replace(".", ",")}%0A`;
+
+        });
+
+        mensagem +=
+            `%0ATotal: R$ ` +
+            total.toFixed(2).replace(".", ",");
+
+        // COLOQUE AQUI O NÚMERO DO WHATSAPP
+        const numeroWhatsApp = "5516999999999";
+
+        const link =
+            `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+
+        window.open(link, "_blank");
+
+    });
+
+
+// Inicializar carrinho
+atualizarCarrinho();
+
+adicionarAoCarrinho(
+    "Whey Protein",
+    99.90,
+    "img/wheyproteincard.png"
 );
-
-
-/* =========================================
-   INICIALIZAÇÃO
-========================================= */
-
-renderProducts();
-
-updateCart();
