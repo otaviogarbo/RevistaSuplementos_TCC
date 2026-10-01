@@ -7,16 +7,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Suplementa+ | Revista & Catálogo</title>
+    <title>Revista Suplementos | Revista & Catálogo</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="Style.css">
 
     <!-- Ícones -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 <header class="header">
@@ -30,12 +27,11 @@
             </span>
 
             <span>
-                <strong>SUPLEMENTA+</strong>
+                <strong>Revista Suplementos</strong>
                 <small>Revista & Catálogo</small>
             </span>
 
         </a>
-
 
         <nav class="menu">
 
@@ -45,11 +41,10 @@
 
             <a href="#catalogo">Catálogo</a>
 
-            <a href="#sobre">Sobre</a>
-
             <a href="#contato">Contato</a>
 
         </nav>
+
 
 
         <button class="cart-button">
@@ -110,7 +105,6 @@
                         Conhecer a revista
 
                     </a>
-
                 </div>
 
             </div>
@@ -147,7 +141,7 @@
         </div>
 
     </section>
-        <section class="revista section" id="revista">
+    <section class="revista section" id="revista">
 
         <div class="container">
 
@@ -306,7 +300,7 @@
                 <div class="product-image">
 
                     <img src="img/colagenocard.png" alt="Colágeno" width="150PX">
-                    
+
                 </div>
 
                 <div class="product-info">
@@ -358,9 +352,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="./img/magnesiocard.png" alt="Magnésio" width="150PX"
-                    >
+                    <img src="./img/magnesiocard.png" alt="Magnésio" width="150PX">
 
                 </div>
 
@@ -413,9 +405,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="img/omega_3_transparente(1).png" alt="Ômega 3" width="150PX"
-                    >
+                    <img src="img/omega_3_transparente(1).png" alt="Ômega 3" width="150PX">
 
                 </div>
 
@@ -468,9 +458,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="img/wheyproteincard.png" alt="Whey Protein" width="150PX"
-                    >
+                    <img src="img/wheyproteincard.png" alt="Whey Protein" width="150PX">
 
                 </div>
 
@@ -523,9 +511,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="img/bccaAminoAcidoscard.png" alt="BCAA" width="150PX"
-                    >
+                    <img src="img/bccaAminoAcidoscard.png" alt="BCAA" width="150PX">
 
                 </div>
 
@@ -578,9 +564,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="img/zinco_transparente(1).png" alt="Zinco" width="150PX"
-                    >
+                    <img src="img/zinco_transparente(1).png" alt="Zinco" width="150PX">
 
                 </div>
 
@@ -633,8 +617,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="img/vitamina_c_transparente(1).png" alt="Vitamina C" width="150PX">
+                    <img src="img/vitamina_c_transparente(1).png" alt="Vitamina C" width="150PX">
                 </div>
 
                 <div class="product-info">
@@ -686,9 +669,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="img/multivitaminico_transparente(1).png" alt="Multivitamínico" width="150PX"
-                    >
+                    <img src="img/multivitaminico_transparente(1).png" alt="Multivitamínico" width="150PX">
 
                 </div>
 
@@ -741,9 +722,7 @@
 
                 <div class="product-image">
 
-                    <img
-                        src="img/vitamina_d_transparente(1).png" alt="Vitamina D" width="150PX"
-                    >
+                    <img src="img/vitamina_d_transparente(1).png" alt="Vitamina D" width="150PX">
 
                 </div>
 
@@ -795,247 +774,247 @@
     </div>
 
 </section>
-    <!-- SUPLEMENTA+ - CATÁLOGO E CARRINHO -->
-    <script>
-/* ==========================================================
-   SUPLEMENTA+ - FUNÇÕES DO CATÁLOGO E CARRINHO
-   Compatível com Revistasuplementos2.html
-   ========================================================== */
+<!-- SUPLEMENTA+ - CATÁLOGO E CARRINHO -->
+<script>
+    /* ==========================================================
+       SUPLEMENTA+ - FUNÇÕES DO CATÁLOGO E CARRINHO
+       Compatível com Revistasuplementos2.html
+       ========================================================== */
 
-/*
-  IMPORTANTE:
-  O HTML enviado não informa preços dos produtos.
-  Por isso, os preços abaixo são exemplos e podem ser alterados
-  neste objeto. O nome e as imagens seguem o seu HTML.
-*/
+    /*
+      IMPORTANTE:
+      O HTML enviado não informa preços dos produtos.
+      Por isso, os preços abaixo são exemplos e podem ser alterados
+      neste objeto. O nome e as imagens seguem o seu HTML.
+    */
 
-const produtos = [
-    {
-        id: 1,
-        nome: "Colágeno",
-        categoria: "Saúde e Beleza",
-        preco: 59.90,
-        imagem: "img/colagenocard.png",
-        descricao: "Suplemento associado à saúde da pele, cabelos, unhas e articulações."
-    },
-    {
-        id: 2,
-        nome: "Magnésio",
-        categoria: "Minerais",
-        preco: 49.90,
-        imagem: "img/magnesiocard.png",
-        descricao: "Mineral importante para diversas funções do organismo."
-    },
-    {
-        id: 3,
-        nome: "Ômega 3",
-        categoria: "Vitaminas",
-        preco: 69.90,
-        imagem: "img/omega_3_transparente(1).png",
-        descricao: "Suplemento de ácidos graxos conhecido por sua utilização na rotina nutricional."
-    },
-    {
-        id: 4,
-        nome: "Whey Protein",
-        categoria: "Proteínas",
-        preco: 119.90,
-        imagem: "img/wheyproteincard.png",
-        descricao: "Fonte de proteína utilizada na alimentação de pessoas que praticam atividades físicas."
-    },
-    {
-        id: 5,
-        nome: "BCAA",
-        categoria: "Aminoácidos",
-        preco: 79.90,
-        imagem: "img/bccaAminoAcidoscard.png",
-        descricao: "Aminoácidos de cadeia ramificada utilizados na rotina de treinamento."
-    },
-    {
-        id: 6,
-        nome: "Zinco",
-        categoria: "Minerais",
-        preco: 39.90,
-        imagem: "img/zinco_transparente(1).png",
-        descricao: "Mineral que participa de diversas funções importantes do organismo."
-    },
-    {
-        id: 7,
-        nome: "Vitamina C",
-        categoria: "Vitaminas",
-        preco: 34.90,
-        imagem: "img/vitamina_c_transparente(1).png",
-        descricao: "Vitamina conhecida por sua função antioxidante e participação na imunidade."
-    },
-    {
-        id: 8,
-        nome: "Multivitamínico",
-        categoria: "Vitaminas",
-        preco: 64.90,
-        imagem: "img/multivitaminico_transparente(1).png",
-        descricao: "Combinação de vitaminas e minerais para complementar a alimentação."
-    },
-    {
-        id: 9,
-        nome: "Vitamina D",
-        categoria: "Vitaminas",
-        preco: 29.90,
-        imagem: "img/vitamina_d_transparente(1).png",
-        descricao: "Vitamina importante para diversas funções do organismo."
-    }
-];
+    const produtos = [
+        {
+            id: 1,
+            nome: "Colágeno",
+            categoria: "Saúde e Beleza",
+            preco: 59.90,
+            imagem: "img/colagenocard.png",
+            descricao: "Suplemento associado à saúde da pele, cabelos, unhas e articulações."
+        },
+        {
+            id: 2,
+            nome: "Magnésio",
+            categoria: "Minerais",
+            preco: 49.90,
+            imagem: "img/magnesiocard.png",
+            descricao: "Mineral importante para diversas funções do organismo."
+        },
+        {
+            id: 3,
+            nome: "Ômega 3",
+            categoria: "Vitaminas",
+            preco: 69.90,
+            imagem: "img/omega_3_transparente(1).png",
+            descricao: "Suplemento de ácidos graxos conhecido por sua utilização na rotina nutricional."
+        },
+        {
+            id: 4,
+            nome: "Whey Protein",
+            categoria: "Proteínas",
+            preco: 119.90,
+            imagem: "img/wheyproteincard.png",
+            descricao: "Fonte de proteína utilizada na alimentação de pessoas que praticam atividades físicas."
+        },
+        {
+            id: 5,
+            nome: "BCAA",
+            categoria: "Aminoácidos",
+            preco: 79.90,
+            imagem: "img/bccaAminoAcidoscard.png",
+            descricao: "Aminoácidos de cadeia ramificada utilizados na rotina de treinamento."
+        },
+        {
+            id: 6,
+            nome: "Zinco",
+            categoria: "Minerais",
+            preco: 39.90,
+            imagem: "img/zinco_transparente(1).png",
+            descricao: "Mineral que participa de diversas funções importantes do organismo."
+        },
+        {
+            id: 7,
+            nome: "Vitamina C",
+            categoria: "Vitaminas",
+            preco: 34.90,
+            imagem: "img/vitamina_c_transparente(1).png",
+            descricao: "Vitamina conhecida por sua função antioxidante e participação na imunidade."
+        },
+        {
+            id: 8,
+            nome: "Multivitamínico",
+            categoria: "Vitaminas",
+            preco: 64.90,
+            imagem: "img/multivitaminico_transparente(1).png",
+            descricao: "Combinação de vitaminas e minerais para complementar a alimentação."
+        },
+        {
+            id: 9,
+            nome: "Vitamina D",
+            categoria: "Vitaminas",
+            preco: 29.90,
+            imagem: "img/vitamina_d_transparente(1).png",
+            descricao: "Vitamina importante para diversas funções do organismo."
+        }
+    ];
 
-/* ==========================================================
-   CONFIGURAÇÃO
-   ========================================================== */
+    /* ==========================================================
+       CONFIGURAÇÃO
+       ========================================================== */
 
-// Troque pelo WhatsApp que receberá os pedidos.
-// Exemplo: 5516999999999
-const NUMERO_WHATSAPP = "5516999999999";
+    // Troque pelo WhatsApp que receberá os pedidos.
+    // Exemplo: 5516999999999
+    const NUMERO_WHATSAPP = "5516999999999";
 
-let carrinho = JSON.parse(localStorage.getItem("suplementaCarrinho")) || [];
-
-
-/* ==========================================================
-   FUNÇÕES BÁSICAS
-   ========================================================== */
-
-function dinheiro(valor) {
-    return valor.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    });
-}
-
-function salvarCarrinho() {
-    localStorage.setItem(
-        "suplementaCarrinho",
-        JSON.stringify(carrinho)
-    );
-}
-
-function buscarProduto(id) {
-    return produtos.find(produto => produto.id === Number(id));
-}
+    let carrinho = JSON.parse(localStorage.getItem("suplementaCarrinho")) || [];
 
 
-/* ==========================================================
-   ADICIONAR AO CARRINHO
-   ========================================================== */
+    /* ==========================================================
+       FUNÇÕES BÁSICAS
+       ========================================================== */
 
-function adicionarCarrinho(id) {
-
-    const produto = buscarProduto(id);
-
-    if (!produto) return;
-
-    const itemExistente = carrinho.find(
-        item => item.id === produto.id
-    );
-
-    if (itemExistente) {
-        itemExistente.quantidade++;
-    } else {
-        carrinho.push({
-            id: produto.id,
-            nome: produto.nome,
-            preco: produto.preco,
-            imagem: produto.imagem,
-            quantidade: 1
+    function dinheiro(valor) {
+        return valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
         });
     }
 
-    salvarCarrinho();
-    atualizarContador();
-    renderizarCarrinho();
-
-    mostrarMensagem(
-        `${produto.nome} foi adicionado ao carrinho!`
-    );
-}
-
-
-/* ==========================================================
-   REMOVER DO CARRINHO
-   ========================================================== */
-
-function removerCarrinho(id) {
-
-    carrinho = carrinho.filter(
-        item => item.id !== Number(id)
-    );
-
-    salvarCarrinho();
-    atualizarContador();
-    renderizarCarrinho();
-}
-
-
-/* ==========================================================
-   ALTERAR QUANTIDADE
-   ========================================================== */
-
-function alterarQuantidade(id, quantidade) {
-
-    const item = carrinho.find(
-        item => item.id === Number(id)
-    );
-
-    if (!item) return;
-
-    item.quantidade += quantidade;
-
-    if (item.quantidade <= 0) {
-        removerCarrinho(id);
-        return;
+    function salvarCarrinho() {
+        localStorage.setItem(
+            "suplementaCarrinho",
+            JSON.stringify(carrinho)
+        );
     }
 
-    salvarCarrinho();
-    atualizarContador();
-    renderizarCarrinho();
-}
+    function buscarProduto(id) {
+        return produtos.find(produto => produto.id === Number(id));
+    }
 
 
-/* ==========================================================
-   CONTADOR DO CARRINHO
-   ========================================================== */
+    /* ==========================================================
+       ADICIONAR AO CARRINHO
+       ========================================================== */
 
-function atualizarContador() {
+    function adicionarCarrinho(id) {
 
-    const total = carrinho.reduce(
-        (soma, item) => soma + item.quantidade,
-        0
-    );
+        const produto = buscarProduto(id);
 
-    const botoesCarrinho =
-        document.querySelectorAll(".cart-button");
+        if (!produto) return;
 
-    botoesCarrinho.forEach(botao => {
+        const itemExistente = carrinho.find(
+            item => item.id === produto.id
+        );
 
-        let contador = botao.querySelector("b");
-
-        if (!contador) {
-            contador = document.createElement("b");
-            botao.appendChild(contador);
+        if (itemExistente) {
+            itemExistente.quantidade++;
+        } else {
+            carrinho.push({
+                id: produto.id,
+                nome: produto.nome,
+                preco: produto.preco,
+                imagem: produto.imagem,
+                quantidade: 1
+            });
         }
 
-        contador.textContent = total;
-    });
-}
+        salvarCarrinho();
+        atualizarContador();
+        renderizarCarrinho();
+
+        mostrarMensagem(
+            `${produto.nome} foi adicionado ao carrinho!`
+        );
+    }
 
 
-/* ==========================================================
-   CRIAR JANELA DO CARRINHO
-   ========================================================== */
+    /* ==========================================================
+       REMOVER DO CARRINHO
+       ========================================================== */
 
-function criarCarrinhoHTML() {
+    function removerCarrinho(id) {
 
-    if (document.getElementById("carrinhoModal")) return;
+        carrinho = carrinho.filter(
+            item => item.id !== Number(id)
+        );
 
-    const modal = document.createElement("div");
+        salvarCarrinho();
+        atualizarContador();
+        renderizarCarrinho();
+    }
 
-    modal.id = "carrinhoModal";
 
-    modal.innerHTML = `
+    /* ==========================================================
+       ALTERAR QUANTIDADE
+       ========================================================== */
+
+    function alterarQuantidade(id, quantidade) {
+
+        const item = carrinho.find(
+            item => item.id === Number(id)
+        );
+
+        if (!item) return;
+
+        item.quantidade += quantidade;
+
+        if (item.quantidade <= 0) {
+            removerCarrinho(id);
+            return;
+        }
+
+        salvarCarrinho();
+        atualizarContador();
+        renderizarCarrinho();
+    }
+
+
+    /* ==========================================================
+       CONTADOR DO CARRINHO
+       ========================================================== */
+
+    function atualizarContador() {
+
+        const total = carrinho.reduce(
+            (soma, item) => soma + item.quantidade,
+            0
+        );
+
+        const botoesCarrinho =
+            document.querySelectorAll(".cart-button");
+
+        botoesCarrinho.forEach(botao => {
+
+            let contador = botao.querySelector("b");
+
+            if (!contador) {
+                contador = document.createElement("b");
+                botao.appendChild(contador);
+            }
+
+            contador.textContent = total;
+        });
+    }
+
+
+    /* ==========================================================
+       CRIAR JANELA DO CARRINHO
+       ========================================================== */
+
+    function criarCarrinhoHTML() {
+
+        if (document.getElementById("carrinhoModal")) return;
+
+        const modal = document.createElement("div");
+
+        modal.id = "carrinhoModal";
+
+        modal.innerHTML = `
         <div class="carrinho-caixa">
 
             <div class="carrinho-topo">
@@ -1082,70 +1061,70 @@ function criarCarrinhoHTML() {
         </div>
     `;
 
-    document.body.appendChild(modal);
+        document.body.appendChild(modal);
 
-    document
-        .getElementById("fecharCarrinho")
-        .addEventListener("click", fecharCarrinho);
+        document
+            .getElementById("fecharCarrinho")
+            .addEventListener("click", fecharCarrinho);
 
-    document
-        .getElementById("finalizarWhatsApp")
-        .addEventListener("click", finalizarWhatsApp);
+        document
+            .getElementById("finalizarWhatsApp")
+            .addEventListener("click", finalizarWhatsApp);
 
-    document
-        .getElementById("limparCarrinho")
-        .addEventListener("click", limparCarrinho);
+        document
+            .getElementById("limparCarrinho")
+            .addEventListener("click", limparCarrinho);
 
-    modal.addEventListener("click", evento => {
+        modal.addEventListener("click", evento => {
 
-        if (evento.target === modal) {
-            fecharCarrinho();
-        }
+            if (evento.target === modal) {
+                fecharCarrinho();
+            }
 
-    });
+        });
 
-    inserirEstiloCarrinho();
-}
-
-
-/* ==========================================================
-   RENDERIZAR CARRINHO
-   ========================================================== */
-
-function renderizarCarrinho() {
-
-    criarCarrinhoHTML();
-
-    const lista = document.getElementById("itensCarrinho");
-    const vazio = document.getElementById("carrinhoVazio");
-    const valorTotal = document.getElementById("valorTotal");
-
-    lista.innerHTML = "";
-
-    if (carrinho.length === 0) {
-
-        vazio.style.display = "block";
-        valorTotal.textContent = "R$ 0,00";
-
-        return;
+        inserirEstiloCarrinho();
     }
 
-    vazio.style.display = "none";
 
-    let total = 0;
+    /* ==========================================================
+       RENDERIZAR CARRINHO
+       ========================================================== */
 
-    carrinho.forEach(item => {
+    function renderizarCarrinho() {
 
-        const subtotal =
-            item.preco * item.quantidade;
+        criarCarrinhoHTML();
 
-        total += subtotal;
+        const lista = document.getElementById("itensCarrinho");
+        const vazio = document.getElementById("carrinhoVazio");
+        const valorTotal = document.getElementById("valorTotal");
 
-        const elemento = document.createElement("div");
+        lista.innerHTML = "";
 
-        elemento.className = "item-carrinho";
+        if (carrinho.length === 0) {
 
-        elemento.innerHTML = `
+            vazio.style.display = "block";
+            valorTotal.textContent = "R$ 0,00";
+
+            return;
+        }
+
+        vazio.style.display = "none";
+
+        let total = 0;
+
+        carrinho.forEach(item => {
+
+            const subtotal =
+                item.preco * item.quantidade;
+
+            total += subtotal;
+
+            const elemento = document.createElement("div");
+
+            elemento.className = "item-carrinho";
+
+            elemento.innerHTML = `
             <img
                 src="${item.imagem}"
                 alt="${item.nome}"
@@ -1195,188 +1174,188 @@ function renderizarCarrinho() {
             </div>
         `;
 
-        lista.appendChild(elemento);
-    });
-
-    valorTotal.textContent = dinheiro(total);
-}
-
-
-/* ==========================================================
-   ABRIR / FECHAR CARRINHO
-   ========================================================== */
-
-function abrirCarrinho() {
-
-    criarCarrinhoHTML();
-    renderizarCarrinho();
-
-    document
-        .getElementById("carrinhoModal")
-        .classList.add("aberto");
-
-    document.body.classList.add("carrinho-aberto");
-}
-
-function fecharCarrinho() {
-
-    const modal =
-        document.getElementById("carrinhoModal");
-
-    if (!modal) return;
-
-    modal.classList.remove("aberto");
-
-    document.body.classList.remove("carrinho-aberto");
-}
-
-
-/* ==========================================================
-   LIMPAR CARRINHO
-   ========================================================== */
-
-function limparCarrinho() {
-
-    if (carrinho.length === 0) return;
-
-    carrinho = [];
-
-    salvarCarrinho();
-    atualizarContador();
-    renderizarCarrinho();
-
-    mostrarMensagem("Carrinho limpo!");
-}
-
-
-/* ==========================================================
-   WHATSAPP
-   ========================================================== */
-
-function finalizarWhatsApp() {
-
-    if (carrinho.length === 0) {
-
-        mostrarMensagem(
-            "Adicione produtos ao carrinho primeiro."
-        );
-
-        return;
-    }
-
-    let mensagem =
-        "Olá! Gostaria de fazer um pedido na Suplementa+.%0A%0A";
-
-    let total = 0;
-
-    carrinho.forEach(item => {
-
-        const subtotal =
-            item.preco * item.quantidade;
-
-        total += subtotal;
-
-        mensagem +=
-            `• ${item.nome} - ${item.quantidade}x - ${dinheiro(subtotal)}%0A`;
-    });
-
-    mensagem +=
-        `%0A*Total: ${dinheiro(total)}*`;
-
-    mensagem +=
-        "%0A%0AGostaria de saber a disponibilidade dos produtos.";
-
-    const url =
-        `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagem}`;
-
-    window.open(url, "_blank");
-}
-
-
-/* ==========================================================
-   BOTÕES DO CATÁLOGO
-   ========================================================== */
-
-function configurarCatalogo() {
-
-    const cards =
-        document.querySelectorAll(".product-card");
-
-    cards.forEach((card, index) => {
-
-        const produto = produtos[index];
-
-        if (!produto) return;
-
-        /*
-          Adiciona preço ao card sem alterar o HTML original.
-        */
-
-        const info =
-            card.querySelector(".product-info");
-
-        const botao =
-            card.querySelector(".product-button");
-
-        if (!info || !botao) return;
-
-        const preco = document.createElement("div");
-
-        preco.className = "preco-produto";
-
-        preco.textContent =
-            dinheiro(produto.preco);
-
-        info.insertBefore(preco, botao);
-
-        /*
-          Troca o botão "Ver detalhes" por uma área
-          com detalhes + adicionar ao carrinho.
-        */
-
-        botao.addEventListener("click", () => {
-
-            abrirDetalhes(produto);
-
+            lista.appendChild(elemento);
         });
 
-        const adicionar =
-            document.createElement("button");
+        valorTotal.textContent = dinheiro(total);
+    }
 
-        adicionar.className =
-            "adicionar-produto";
 
-        adicionar.innerHTML =
-            `<i class="fa-solid fa-cart-plus"></i>
+    /* ==========================================================
+       ABRIR / FECHAR CARRINHO
+       ========================================================== */
+
+    function abrirCarrinho() {
+
+        criarCarrinhoHTML();
+        renderizarCarrinho();
+
+        document
+            .getElementById("carrinhoModal")
+            .classList.add("aberto");
+
+        document.body.classList.add("carrinho-aberto");
+    }
+
+    function fecharCarrinho() {
+
+        const modal =
+            document.getElementById("carrinhoModal");
+
+        if (!modal) return;
+
+        modal.classList.remove("aberto");
+
+        document.body.classList.remove("carrinho-aberto");
+    }
+
+
+    /* ==========================================================
+       LIMPAR CARRINHO
+       ========================================================== */
+
+    function limparCarrinho() {
+
+        if (carrinho.length === 0) return;
+
+        carrinho = [];
+
+        salvarCarrinho();
+        atualizarContador();
+        renderizarCarrinho();
+
+        mostrarMensagem("Carrinho limpo!");
+    }
+
+
+    /* ==========================================================
+       WHATSAPP
+       ========================================================== */
+
+    function finalizarWhatsApp() {
+
+        if (carrinho.length === 0) {
+
+            mostrarMensagem(
+                "Adicione produtos ao carrinho primeiro."
+            );
+
+            return;
+        }
+
+        let mensagem =
+            "Olá! Gostaria de fazer um pedido na Suplementa+.%0A%0A";
+
+        let total = 0;
+
+        carrinho.forEach(item => {
+
+            const subtotal =
+                item.preco * item.quantidade;
+
+            total += subtotal;
+
+            mensagem +=
+                `• ${item.nome} - ${item.quantidade}x - ${dinheiro(subtotal)}%0A`;
+        });
+
+        mensagem +=
+            `%0A*Total: ${dinheiro(total)}*`;
+
+        mensagem +=
+            "%0A%0AGostaria de saber a disponibilidade dos produtos.";
+
+        const url =
+            `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagem}`;
+
+        window.open(url, "_blank");
+    }
+
+
+    /* ==========================================================
+       BOTÕES DO CATÁLOGO
+       ========================================================== */
+
+    function configurarCatalogo() {
+
+        const cards =
+            document.querySelectorAll(".product-card");
+
+        cards.forEach((card, index) => {
+
+            const produto = produtos[index];
+
+            if (!produto) return;
+
+            /*
+              Adiciona preço ao card sem alterar o HTML original.
+            */
+
+            const info =
+                card.querySelector(".product-info");
+
+            const botao =
+                card.querySelector(".product-button");
+
+            if (!info || !botao) return;
+
+            const preco = document.createElement("div");
+
+            preco.className = "preco-produto";
+
+            preco.textContent =
+                dinheiro(produto.preco);
+
+            info.insertBefore(preco, botao);
+
+            /*
+              Troca o botão "Ver detalhes" por uma área
+              com detalhes + adicionar ao carrinho.
+            */
+
+            botao.addEventListener("click", () => {
+
+                abrirDetalhes(produto);
+
+            });
+
+            const adicionar =
+                document.createElement("button");
+
+            adicionar.className =
+                "adicionar-produto";
+
+            adicionar.innerHTML =
+                `<i class="fa-solid fa-cart-plus"></i>
              Adicionar ao carrinho`;
 
-        adicionar.addEventListener(
-            "click",
-            () => adicionarCarrinho(produto.id)
-        );
+            adicionar.addEventListener(
+                "click",
+                () => adicionarCarrinho(produto.id)
+            );
 
-        info.appendChild(adicionar);
-    });
-}
+            info.appendChild(adicionar);
+        });
+    }
 
 
-/* ==========================================================
-   MODAL DE DETALHES
-   ========================================================== */
+    /* ==========================================================
+       MODAL DE DETALHES
+       ========================================================== */
 
-function abrirDetalhes(produto) {
+    function abrirDetalhes(produto) {
 
-    const modal =
-        document.getElementById("detalhesModal");
+        const modal =
+            document.getElementById("detalhesModal");
 
-    if (modal) modal.remove();
+        if (modal) modal.remove();
 
-    const novoModal =
-        document.createElement("div");
+        const novoModal =
+            document.createElement("div");
 
-    novoModal.id = "detalhesModal";
+        novoModal.id = "detalhesModal";
 
-    novoModal.innerHTML = `
+        novoModal.innerHTML = `
 
         <div class="detalhes-caixa">
 
@@ -1413,104 +1392,104 @@ function abrirDetalhes(produto) {
         </div>
     `;
 
-    document.body.appendChild(novoModal);
+        document.body.appendChild(novoModal);
 
-    novoModal
-        .querySelector("#fecharDetalhes")
-        .addEventListener("click", () => {
-            novoModal.remove();
+        novoModal
+            .querySelector("#fecharDetalhes")
+            .addEventListener("click", () => {
+                novoModal.remove();
+            });
+
+        novoModal
+            .querySelector("#adicionarDetalhes")
+            .addEventListener("click", () => {
+
+                adicionarCarrinho(produto.id);
+
+                novoModal.remove();
+
+            });
+
+        novoModal.addEventListener("click", evento => {
+
+            if (evento.target === novoModal) {
+                novoModal.remove();
+            }
+
         });
-
-    novoModal
-        .querySelector("#adicionarDetalhes")
-        .addEventListener("click", () => {
-
-            adicionarCarrinho(produto.id);
-
-            novoModal.remove();
-
-        });
-
-    novoModal.addEventListener("click", evento => {
-
-        if (evento.target === novoModal) {
-            novoModal.remove();
-        }
-
-    });
-}
-
-
-/* ==========================================================
-   BOTÃO DO CARRINHO DO HEADER
-   ========================================================== */
-
-function configurarBotaoCarrinho() {
-
-    const botoes =
-        document.querySelectorAll(".cart-button");
-
-    botoes.forEach(botao => {
-
-        botao.addEventListener(
-            "click",
-            abrirCarrinho
-        );
-
-    });
-}
-
-
-/* ==========================================================
-   MENSAGEM
-   ========================================================== */
-
-function mostrarMensagem(texto) {
-
-    let mensagem =
-        document.getElementById("mensagemSuplementa");
-
-    if (!mensagem) {
-
-        mensagem =
-            document.createElement("div");
-
-        mensagem.id =
-            "mensagemSuplementa";
-
-        document.body.appendChild(mensagem);
     }
 
-    mensagem.textContent = texto;
 
-    mensagem.classList.add("mostrar");
+    /* ==========================================================
+       BOTÃO DO CARRINHO DO HEADER
+       ========================================================== */
 
-    clearTimeout(window.timeoutMensagem);
+    function configurarBotaoCarrinho() {
 
-    window.timeoutMensagem =
-        setTimeout(() => {
+        const botoes =
+            document.querySelectorAll(".cart-button");
 
-            mensagem.classList.remove("mostrar");
+        botoes.forEach(botao => {
 
-        }, 2500);
-}
+            botao.addEventListener(
+                "click",
+                abrirCarrinho
+            );
+
+        });
+    }
 
 
-/* ==========================================================
-   CSS CRIADO PELO JAVASCRIPT
-   Assim não é necessário modificar o seu Style.css
-   ========================================================== */
+    /* ==========================================================
+       MENSAGEM
+       ========================================================== */
 
-function inserirEstiloCarrinho() {
+    function mostrarMensagem(texto) {
 
-    if (document.getElementById("estiloCarrinho")) return;
+        let mensagem =
+            document.getElementById("mensagemSuplementa");
 
-    const style =
-        document.createElement("style");
+        if (!mensagem) {
 
-    style.id = "estiloCarrinho";
+            mensagem =
+                document.createElement("div");
 
-    style.textContent = `
+            mensagem.id =
+                "mensagemSuplementa";
+
+            document.body.appendChild(mensagem);
+        }
+
+        mensagem.textContent = texto;
+
+        mensagem.classList.add("mostrar");
+
+        clearTimeout(window.timeoutMensagem);
+
+        window.timeoutMensagem =
+            setTimeout(() => {
+
+                mensagem.classList.remove("mostrar");
+
+            }, 2500);
+    }
+
+
+    /* ==========================================================
+       CSS CRIADO PELO JAVASCRIPT
+       Assim não é necessário modificar o seu Style.css
+       ========================================================== */
+
+    function inserirEstiloCarrinho() {
+
+        if (document.getElementById("estiloCarrinho")) return;
+
+        const style =
+            document.createElement("style");
+
+        style.id = "estiloCarrinho";
+
+        style.textContent = `
 
         #carrinhoModal,
         #detalhesModal {
@@ -1757,44 +1736,109 @@ function inserirEstiloCarrinho() {
         }
     `;
 
-    document.head.appendChild(style);
-}
+        document.head.appendChild(style);
+    }
 
 
-/* ==========================================================
-   ESC FECHA MODAIS
-   ========================================================== */
+    /* ==========================================================
+       ESC FECHA MODAIS
+       ========================================================== */
 
-document.addEventListener("keydown", evento => {
+    document.addEventListener("keydown", evento => {
 
-    if (evento.key !== "Escape") return;
+        if (evento.key !== "Escape") return;
 
-    fecharCarrinho();
+        fecharCarrinho();
 
-    const detalhes =
-        document.getElementById("detalhesModal");
+        const detalhes =
+            document.getElementById("detalhesModal");
 
-    if (detalhes) detalhes.remove();
+        if (detalhes) detalhes.remove();
 
-});
+    });
 
 
-/* ==========================================================
-   INICIALIZAÇÃO
-   ========================================================== */
+    /* ==========================================================
+       INICIALIZAÇÃO
+       ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
 
-    criarCarrinhoHTML();
+        criarCarrinhoHTML();
 
-    configurarCatalogo();
+        configurarCatalogo();
 
-    configurarBotaoCarrinho();
+        configurarBotaoCarrinho();
 
-    atualizarContador();
+        atualizarContador();
 
-    renderizarCarrinho();
+        renderizarCarrinho();
 
-});
+    });
 
-    </script>
+</script>
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <div class="footer-brand">
+
+            <h3>
+                <i class="fa-solid fa-dumbbell"></i>
+                Revista Suplementos
+            </h3>
+
+            <p>
+                Revista digital e catálogo de suplementação.
+            </p>
+
+        </div>
+
+        <nav>
+            <div class="footer-links">
+
+                <h4>
+                    Navegação
+                </h4>
+
+                <a href="#inicio">Início</a>
+                <a href="#revista">Revista</a>
+                <a href="#catalogo">Catálogo</a>
+                <a href="#contato">Contato</a>
+
+
+            </div>
+        </nav>
+
+
+
+        <div id="contato">
+
+            <h4>
+                Redes
+            </h4>
+
+            <a href="#">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+
+            <a href="#" id="footerWhatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 Revista Suplementos. Todos os direitos reservados.
+
+    </div>
+
+</footer>
